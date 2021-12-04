@@ -63,7 +63,7 @@ namespace TestApiJWT.Services
         }
         public async Task<string> AddRoleAsync(RoleModel model)
         {
-            var user = await _userManager.FindByIdAsync(model.UserId);
+            var user = await _userManager.FindByEmailAsync(model.Email);
             if (user is null || !await _roleManager.RoleExistsAsync(model.Role))
             {
                 return "Invalid User ID or Role";

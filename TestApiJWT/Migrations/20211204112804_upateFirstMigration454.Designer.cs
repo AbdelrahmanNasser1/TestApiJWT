@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestApiJWT.Models;
 
 namespace TestApiJWT.Migrations
 {
     [DbContext(typeof(ApplicationDbCobtext))]
-    partial class ApplicationDbCobtextModelSnapshot : ModelSnapshot
+    [Migration("20211204112804_upateFirstMigration454")]
+    partial class upateFirstMigration454
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

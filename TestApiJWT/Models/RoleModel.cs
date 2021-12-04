@@ -9,7 +9,7 @@ namespace TestApiJWT.Models
     public class RoleModel
     {
         [Required]
-        public string UserId { get; set; }
+        public string Email { get; set; }
         [Required]
         public string Role { get; set; }
 

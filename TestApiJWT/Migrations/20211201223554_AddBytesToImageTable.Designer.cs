@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestApiJWT.Models;
 
 namespace TestApiJWT.Migrations
 {
     [DbContext(typeof(ApplicationDbCobtext))]
-    partial class ApplicationDbCobtextModelSnapshot : ModelSnapshot
+    [Migration("20211201223554_AddBytesToImageTable")]
+    partial class AddBytesToImageTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -265,11 +267,14 @@ namespace TestApiJWT.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ApartmentId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ApartmentInfoId")
                         .HasColumnType("int");
 
-                    b.Property<string>("imageBytes")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("imageBytes")
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
@@ -331,11 +336,9 @@ namespace TestApiJWT.Migrations
 
             modelBuilder.Entity("TestApiJWT.Models.ImagesOfApartment", b =>
                 {
-                    b.HasOne("TestApiJWT.Models.ApartmentInfo", "ApartmentInfo")
+                    b.HasOne("TestApiJWT.Models.ApartmentInfo", null)
                         .WithMany("Images")
                         .HasForeignKey("ApartmentInfoId");
-
-                    b.Navigation("ApartmentInfo");
                 });
 
             modelBuilder.Entity("TestApiJWT.Models.ApartmentInfo", b =>

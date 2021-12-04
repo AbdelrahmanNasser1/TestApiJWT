@@ -9,10 +9,15 @@ namespace TestApiJWT.Models
 {
     public class ApplicationDbCobtext : IdentityDbContext<ApplicatonClass>
     {
-        public ApplicationDbCobtext(DbContextOptions<ApplicationDbCobtext>options) :base(options)
+        public ApplicationDbCobtext(DbContextOptions<ApplicationDbCobtext> options) : base(options)
         {
 
         }
+       
+        public DbSet<ApartmentInfo> ApartmentInfos { get; set; }
+        public DbSet<ImagesOfApartment> ImagesOfApartments { get; set; }
     }
-
 }
+
+
+

@@ -14,9 +14,11 @@ namespace TestApiJWT.Controllers
     public class AuthController : Controller
     {
         private readonly IAuthService _authService;
-        public AuthController(IAuthService authService)
+        private readonly IRoomService _roomService;
+        public AuthController(IAuthService authService, IRoomService roomService)
         {
             _authService = authService;
+            _roomService = roomService;
         }
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterModel model)
@@ -63,6 +65,38 @@ namespace TestApiJWT.Controllers
                 return BadRequest(result);
             }
             return Ok(model);
+        }
+        [Authorize]
+        [HttpPost("AddApartment")]
+        public async Task<IActionResult> AddApartment([FromBody] RoomModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _roomService.AddApartment(model);
+
+            if (!string.IsNullOrEmpty(result))
+            {
+                return BadRequest(result);
+            }
+            return Ok(model);
+        }
+        [Authorize]
+        [HttpGet("GetImages")]
+        public async Task<IActionResult> GetImages([FromBody] string nameOfApartment)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _roomService.GetImages(nameOfApartment);
+
+            if (!result.Any())
+            {
+                return BadRequest("Name of Apartment is null or there is no apartment name with this string");
+            }
+            return Ok(result);
         }
     }
 }

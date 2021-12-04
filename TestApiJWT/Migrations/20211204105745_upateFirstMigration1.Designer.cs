@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestApiJWT.Models;
 
 namespace TestApiJWT.Migrations
 {
     [DbContext(typeof(ApplicationDbCobtext))]
-    partial class ApplicationDbCobtextModelSnapshot : ModelSnapshot
+    [Migration("20211204105745_upateFirstMigration1")]
+    partial class upateFirstMigration1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -275,7 +277,7 @@ namespace TestApiJWT.Migrations
 
                     b.HasIndex("ApartmentInfoId");
 
-                    b.ToTable("ImagesOfApartments");
+                    b.ToTable("ImagesOfApartment");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

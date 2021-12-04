@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestApiJWT.Models;
 
 namespace TestApiJWT.Migrations
 {
     [DbContext(typeof(ApplicationDbCobtext))]
-    partial class ApplicationDbCobtextModelSnapshot : ModelSnapshot
+    [Migration("20211202212811_UpdateDBContext447")]
+    partial class UpdateDBContext447
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -265,7 +267,10 @@ namespace TestApiJWT.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ApartmentInfoId")
+                    b.Property<int>("ApartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("apartmentInfoId")
                         .HasColumnType("int");
 
                     b.Property<string>("imageBytes")
@@ -273,9 +278,9 @@ namespace TestApiJWT.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApartmentInfoId");
+                    b.HasIndex("apartmentInfoId");
 
-                    b.ToTable("ImagesOfApartments");
+                    b.ToTable("ImagesOfApartment");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -331,11 +336,11 @@ namespace TestApiJWT.Migrations
 
             modelBuilder.Entity("TestApiJWT.Models.ImagesOfApartment", b =>
                 {
-                    b.HasOne("TestApiJWT.Models.ApartmentInfo", "ApartmentInfo")
+                    b.HasOne("TestApiJWT.Models.ApartmentInfo", "apartmentInfo")
                         .WithMany("Images")
-                        .HasForeignKey("ApartmentInfoId");
+                        .HasForeignKey("apartmentInfoId");
 
-                    b.Navigation("ApartmentInfo");
+                    b.Navigation("apartmentInfo");
                 });
 
             modelBuilder.Entity("TestApiJWT.Models.ApartmentInfo", b =>
